@@ -41,6 +41,9 @@ export default {
             script: "typescript",
             style: "scss",
           },
+          scss: {
+            // prependData: `@import 'src/styles/variables.scss';`,
+          },
         }),
       }),
       typescript({ sourceMap: dev }),
@@ -104,6 +107,9 @@ export default {
           defaults: {
             script: "typescript",
             style: "scss",
+          },
+          scss: {
+            // prependData: `@import 'src/styles/variables.scss';`,
           },
         }),
       }),
