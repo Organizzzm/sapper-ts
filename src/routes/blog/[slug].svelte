@@ -1,5 +1,16 @@
 <script context="module" lang="ts">
-  export async function preload({ params }) {
+  interface Post {
+    title: string;
+    html: string;
+  }
+
+  export async function preload({
+    params,
+  }: {
+    params: {
+      slug: string;
+    };
+  }): Promise<{ post: Post }> {
     // the `slug` parameter is available because
     // this file is called [slug].svelte
     const res = await this.fetch(`blog/${params.slug}.json`);
@@ -14,7 +25,7 @@
 </script>
 
 <script lang="ts">
-  export let post: any;
+  export let post: Post;
 </script>
 
 <style>

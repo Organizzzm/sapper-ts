@@ -1,5 +1,5 @@
 <script context="module" lang="ts">
-  export function preload() {
+  export function preload(): any {
     return this.fetch(`blog.json`)
       .then((r: any) => r.json())
       .then((posts: any) => {
