@@ -32,7 +32,16 @@ export default {
         dev,
         hydratable: true,
         emitCss: true,
-        preprocess: autoPreprocess(),
+        preprocess: autoPreprocess({
+          postcss: {
+            plugins: [require("autoprefixer")()],
+          },
+          sourceMap: dev,
+          defaults: {
+            script: "typescript",
+            style: "scss",
+          },
+        }),
       }),
       typescript({ sourceMap: dev }),
       resolve({
@@ -87,7 +96,16 @@ export default {
         generate: "ssr",
         hydratable: true,
         dev,
-        preprocess: autoPreprocess(),
+        preprocess: autoPreprocess({
+          postcss: {
+            plugins: [require("autoprefixer")()],
+          },
+          sourceMap: dev,
+          defaults: {
+            script: "typescript",
+            style: "scss",
+          },
+        }),
       }),
       typescript({ sourceMap: dev }),
       resolve({
