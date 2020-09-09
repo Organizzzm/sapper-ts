@@ -2,7 +2,11 @@
   "extends": "@tsconfig/svelte/tsconfig.json",
   "compilerOptions": {
     "target": "esnext",
-    "strict": true
+    "strict": true,
+    "types": ["svelte", "./types"]
+  },
+  "paths": {
+    "@/*": ["./*"]
   },
   "include": ["src/**/*", "src/node_modules"],
   "exclude": ["node_modules/*", "__sapper__/*", "public/*"]

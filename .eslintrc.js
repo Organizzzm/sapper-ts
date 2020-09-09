@@ -12,7 +12,7 @@ module.exports = {
     browser: true,
   },
   extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
-  plugins: ["svelte3"],
+  plugins: ["svelte3", "@typescript-eslint"],
   overrides: [
     {
       files: ["*.svelte"],

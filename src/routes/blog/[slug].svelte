@@ -1,35 +1,5 @@
-<script context="module" lang="ts">
-  interface Post {
-    title: string;
-    html: string;
-  }
-
-  export async function preload({
-    params,
-  }: {
-    params: {
-      slug: string;
-    };
-  }): Promise<{ post: Post }> {
-    // the `slug` parameter is available because
-    // this file is called [slug].svelte
-    const res = await this.fetch(`blog/${params.slug}.json`);
-    const data = await res.json();
-
-    if (res.status === 200) {
-      return { post: data };
-    } else {
-      this.error(res.status, data.message);
-    }
-  }
-</script>
-
-<script lang="ts">
-  export let post: Post;
-</script>
-
 <style>
-  /*
+/*
 		By default, CSS is locally scoped to the component,
 		and any unused styles are dead-code-eliminated.
 		In this page, Svelte can't know which elements are
@@ -37,32 +7,63 @@
 		so we have to use the :global(...) modifier to target
 		all elements inside .content
 	*/
-  .content :global(h2) {
-    font-size: 1.4em;
-    font-weight: 500;
-  }
+.content :global(h2) {
+  font-size: 1.4em;
+  font-weight: 500;
+}
 
-  .content :global(pre) {
-    background-color: #f9f9f9;
-    box-shadow: inset 1px 1px 5px rgba(0, 0, 0, 0.05);
-    padding: 0.5em;
-    border-radius: 2px;
-    overflow-x: auto;
-  }
+.content :global(pre) {
+  background-color: #f9f9f9;
+  border-radius: 2px;
+  box-shadow: inset 1px 1px 5px rgba(0, 0, 0, 0.05);
+  overflow-x: auto;
+  padding: 0.5em;
+}
 
-  .content :global(pre) :global(code) {
-    background-color: transparent;
-    padding: 0;
-  }
+.content :global(pre) :global(code) {
+  background-color: transparent;
+  padding: 0;
+}
 
-  .content :global(ul) {
-    line-height: 1.5;
-  }
+.content :global(ul) {
+  line-height: 1.5;
+}
 
-  .content :global(li) {
-    margin: 0 0 0.5em 0;
-  }
+.content :global(li) {
+  margin: 0 0 0.5em;
+}
 </style>
+
+<script context="module" lang="ts">
+interface Post {
+  title: string;
+  html: string;
+}
+
+export const preload: typeof SapperPreload = async function ({
+  params,
+}: {
+  params: {
+    slug: string;
+  };
+}): Promise<{ post: Post }> {
+  // the `slug` parameter is available because
+  // this file is called [slug].svelte
+  const res = await this.fetch(`blog/${params.slug}.json`);
+  const data = await res.json();
+
+  if (res.status === 200) {
+    return { post: data };
+  } else {
+    this.error(res.status, data.message);
+    return { post: {} as Post };
+  }
+};
+</script>
+
+<script lang="ts">
+export let post: Post;
+</script>
 
 <svelte:head>
   <title>{post.title}</title>

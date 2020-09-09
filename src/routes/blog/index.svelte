@@ -1,23 +1,20 @@
+<style>
+ul {
+  line-height: 1.5;
+  margin: 0 0 1em;
+}
+</style>
+
 <script context="module" lang="ts">
-  export function preload(): any {
-    return this.fetch(`blog.json`)
-      .then((r: any) => r.json())
-      .then((posts: any) => {
-        return { posts };
-      });
-  }
+export const preload: typeof SapperPreload = async function () {
+  const posts = await this.fetch(`blog.json`).then((res: any) => res.json());
+  return { posts };
+};
 </script>
 
 <script lang="ts">
-  export let posts: any[];
+export let posts: any[];
 </script>
-
-<style>
-  ul {
-    margin: 0 0 1em 0;
-    line-height: 1.5;
-  }
-</style>
 
 <svelte:head>
   <title>Blog</title>
